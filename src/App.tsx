@@ -1,7 +1,8 @@
-import './App.css';
+import { Stage } from '@pixi/react';
 
-function App() {
-  return <></>;
+const REEL_WIDTH = 160;
+const SYMBOL_SIZE = 150;
+
+export default function App() {
+  return <Stage></Stage>;
 }
-
-export default App;
