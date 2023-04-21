@@ -1,8 +1,7 @@
-import { TextStyle, Texture } from 'pixi.js';
-import a from './assets/symbols/a.png';
-import k from './assets/symbols/k.png';
-import q from './assets/symbols/q.png';
+import { TextStyle } from 'pixi.js';
 
+export const REEL_WIDTH = 160;
+export const SYMBOL_SIZE = 150;
 export const lineCount = 5;
 export const lineLength = 3;
 export const defaultSlotArr = new Array(lineCount).fill(0).map(() => new Array(lineLength).fill(0));
@@ -10,18 +9,6 @@ export const defaultSlotArr = new Array(lineCount).fill(0).map(() => new Array(l
 export const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 export const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-export const slotTextures = [a, k, q, k];
-
-export const randomTexture = () =>
-  Texture.from(slotTextures[Math.floor(Math.random() * slotTextures.length)]);
-
-export function lerp(a1: number, a2: number, t: number): number {
-  return a1 * (1 - t) + a2 * t;
-}
-
-export function backout(amount: number): (t: number) => number {
-  return (t: number) => --t * t * ((amount + 1) * t + amount) + 1;
-}
 export const style = new TextStyle({
   fontFamily: 'Arial',
   fontSize: 36,
