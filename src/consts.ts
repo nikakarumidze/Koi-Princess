@@ -1,10 +1,20 @@
 import { TextStyle } from 'pixi.js';
+import { SymbolContainer, Symbol } from './types';
 
 export const REEL_WIDTH = 160;
 export const SYMBOL_SIZE = 150;
 export const lineCount = 5;
 export const lineLength = 3;
-export const defaultSlotArr = new Array(lineCount).fill(0).map(() => new Array(lineLength).fill(0));
+export const defaultSlotArr: SymbolContainer[] = Array(5).fill({
+  symbols: [
+    { index: 0, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: 0 },
+    { index: 1, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: SYMBOL_SIZE },
+    { index: 2, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: SYMBOL_SIZE * 2 },
+  ],
+  blur: 0,
+  position: 0,
+  previousPosition: 0,
+});
 
 export const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 export const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
