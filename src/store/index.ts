@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { gameSettingsSlice } from './gameSettings';
+import { symbolContainerSlice } from './symbolPosition';
 
 export const store = configureStore({
   reducer: {
     gameSettings: gameSettingsSlice.reducer,
+    symbolPosition: symbolContainerSlice.reducer,
   },
 });
 

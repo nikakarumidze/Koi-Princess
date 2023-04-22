@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface gameSettings {
   bet: number;
@@ -18,7 +18,7 @@ export const gameSettingsSlice = createSlice({
   name: 'gameSettings',
   initialState: initGameSettingsState,
   reducers: {
-    increaseLevel: (state: gameSettings, action) => {
+    increaseLevel: (state: gameSettings, action: PayloadAction) => {
       if (state.level === 10) return;
       state.level += 1;
     },

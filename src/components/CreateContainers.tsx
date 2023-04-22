@@ -3,12 +3,15 @@ import { BlurFilter } from 'pixi.js';
 import { withFilters, Container, Sprite } from '@pixi/react';
 import { defaultSlotArr, REEL_WIDTH, SYMBOL_SIZE } from '../consts';
 import { randomTexture } from '../utils/utils';
+import { useAppSelector } from '../store/hooks';
+import { RootState } from '../store';
 
 const CreateContainers: React.FC = () => {
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
+  const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
   return (
     <>
-      {defaultSlotArr.map((subArr, i) => (
+      {symbolContainer.map((subArr, i) => (
         <BlurContainer key={i} x={i * REEL_WIDTH} blur={{ blur: subArr.blur }}>
           {subArr.symbols.map((symbol) => {
             const texture = randomTexture();
