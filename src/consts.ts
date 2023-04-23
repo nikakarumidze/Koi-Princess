@@ -5,16 +5,6 @@ export const REEL_WIDTH = 160;
 export const SYMBOL_SIZE = 150;
 export const lineCount = 5;
 export const lineLength = 3;
-export const defaultSlotArr: SymbolContainer[] = Array(5).fill({
-  symbols: [
-    { index: 0, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: 0 },
-    { index: 1, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: SYMBOL_SIZE },
-    { index: 2, scale: [1], x: Math.round(SYMBOL_SIZE / 2), y: SYMBOL_SIZE * 2 },
-  ],
-  blur: 0,
-  position: 0,
-  previousPosition: 0,
-});
 
 export const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 export const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -36,44 +26,6 @@ export const style = new TextStyle({
   wordWrapWidth: 440,
 });
 
-export const tweening: ITween[] = [];
-
-export interface ITween {
-  object: any;
-  property: string;
-  propertyBeginValue: number;
-  target: number;
-  easing: (t: number) => number;
-  time: number;
-  change?: any;
-  complete?: any;
-  start: number;
-}
-
-export function tweenTo(
-  object: any,
-  property: string,
-  target: number,
-  time: number,
-  easing: (t: number) => number,
-  onchange?: any,
-  oncomplete?: any
-): ITween {
-  const tween: ITween = {
-    object,
-    property,
-    propertyBeginValue: object[property],
-    target,
-    easing,
-    time,
-    change: onchange,
-    complete: oncomplete,
-    start: Date.now(),
-  };
-
-  tweening.push(tween);
-  return tween;
-}
 
 // export const startPlay = (running: boolean, setRunning: React.Dispatch<boolean>) => {
 //   if (running) return;

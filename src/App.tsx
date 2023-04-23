@@ -1,11 +1,9 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as PIXI from 'pixi.js';
-import { useTick, Sprite, Container } from '@pixi/react';
-import { style, defaultSlotArr, height, width, REEL_WIDTH, SYMBOL_SIZE } from './consts';
-import { randomTexture } from './utils/utils';
+import { useTick, Container } from '@pixi/react';
+import { height, width, SYMBOL_SIZE } from './consts';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { IReel } from './types';
 import CreateContainers from './components/CreateContainers';
 import { Stage } from './ContextBridge';
 

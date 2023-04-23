@@ -8,7 +8,7 @@ type ContextBridgeProps = {
   render: (children: ReactNode) => ReactElement;
 };
 
-export const ContextBridge: React.FC<ContextBridgeProps> = ({ children, Context, render }) => {
+const ContextBridge: React.FC<ContextBridgeProps> = ({ children, Context, render }) => {
   return (
     <Context.Consumer>
       {(value) => render(<Context.Provider value={value}>{children}</Context.Provider>)}
