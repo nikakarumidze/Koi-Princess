@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { BlurFilter } from 'pixi.js';
 import { withFilters, Container, Sprite } from '@pixi/react';
-import { defaultSlotArr, REEL_WIDTH, SYMBOL_SIZE } from '../consts';
+import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
 import { randomTexture } from '../utils/utils';
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../store';

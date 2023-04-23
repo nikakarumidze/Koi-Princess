@@ -1,12 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import * as PIXI from 'pixi.js';
-import { useTick, Sprite, Stage, Container } from '@pixi/react';
+import { useTick, Sprite, Container } from '@pixi/react';
 import { style, defaultSlotArr, height, width, REEL_WIDTH, SYMBOL_SIZE } from './consts';
 import { randomTexture } from './utils/utils';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { IReel } from './types';
 import CreateContainers from './components/CreateContainers';
+import { Stage } from './ContextBridge';
 
 const App = (): JSX.Element => {
   const [app, setApp] = useState<PIXI.Application>();
