@@ -1,5 +1,7 @@
 import { Container, Text } from '@pixi/react';
 import { style } from '../consts';
+import { useAppDispatch } from '../store/hooks';
+import { symbolTicker } from '../store/symbolPosition';
 
 // const drawBottom = useCallback((bottom: PIXI.Graphics) => {
 //     bottom.beginFill(0, 1);
@@ -16,9 +18,17 @@ interface IFooter {
   yCoord: number;
 }
 const Footer: React.FC<IFooter> = ({ width, yCoord }) => {
+  const dispatch = useAppDispatch();
   return (
     <Container width={width} height={200} y={yCoord}>
-      <Text text='hi' style={style} x={0} y={0} />
+      <Text
+        text='play!'
+        style={style}
+        x={0}
+        y={0}
+        eventMode='dynamic'
+        click={() => dispatch(symbolTicker())}
+      />
     </Container>
   );
 };
