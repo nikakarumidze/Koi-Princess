@@ -1,12 +1,19 @@
 import React, { useMemo } from 'react';
 import { BlurFilter } from 'pixi.js';
-import { withFilters, Container, Sprite } from '@pixi/react';
+import { withFilters, Container, Sprite, useTick } from '@pixi/react';
 import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { RootState } from '../store';
+import { symbolTicker } from '../store/symbolPosition';
+import { tweeningTicker } from '../store/tweening';
 
 const CreateContainers: React.FC = () => {
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
+  const dispatch = useAppDispatch();
+  useTick((delta) => {
+    dispatch(symbolTicker());
+    dispatch(tweeningTicker());
+  });
   const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
   return (
     <>

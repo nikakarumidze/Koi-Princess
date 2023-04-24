@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, Draft } from '@reduxjs/toolkit';
 import { SymbolContainer } from '../types';
 import { SYMBOL_SIZE } from '../consts';
 import { randomTexture } from '../utils/utils';
+import { slotTextures } from '../utils/loadSymbols';
 
 export const defaultSymbolContainer: SymbolContainer[] = Array(5)
   .fill(null)
@@ -44,7 +45,7 @@ export const symbolContainerSlice = createSlice({
           s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE - SYMBOL_SIZE;
           if (s.y < 0 && s.y > SYMBOL_SIZE) {
             // Detect going over and swap a texture.
-            s.texture = randomTexture();
+            s.texture = slotTextures[Math.random() * slotTextures.length];
             s.scale = Math.min(SYMBOL_SIZE / s.texture.width, SYMBOL_SIZE / s.texture.height);
             s.x = Math.round((SYMBOL_SIZE - s.texture.width) / 2);
           }
