@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { gameSettingsSlice } from './gameSettings';
 import { symbolContainerSlice } from './symbolPosition';
+import { tweeningSlice } from './tweening';
 
 export const store = configureStore({
   reducer: {
     gameSettings: gameSettingsSlice.reducer,
     symbolPosition: symbolContainerSlice.reducer,
+    tweening: tweeningSlice.reducer,
   },
 });
 
@@ -17,4 +19,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
