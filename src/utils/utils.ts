@@ -1,4 +1,4 @@
-import { slotTextures } from './loadSymbols';
+import { slotTextures } from '../loaders/loadSymbols';
 
 // Generates Random Texture
 export const randomTexture = () => slotTextures[Math.floor(Math.random() * slotTextures.length)];

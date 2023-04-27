@@ -1,22 +1,34 @@
-import React, { useMemo } from 'react';
+import React, { useMemo,useEffect } from 'react';
 import { BlurFilter } from 'pixi.js';
 import { withFilters, Container, Sprite, useTick } from '@pixi/react';
 import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { RootState } from '../store';
-import { symbolTicker } from '../store/symbolPosition';
+import { changePosition, symbolTicker } from '../store/symbolPosition';
 import { tweeningTicker } from '../store/tweening';
-import { slotTextures } from '../utils/loadSymbols';
+import { slotTextures } from '../loaders/loadSymbols';
 
 const CreateContainers: React.FC = () => {
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
+  const tweening = useAppSelector((state: RootState) => state.tweening);
+  // const memoizedReels = useMemo(() => reels,[])
   const dispatch = useAppDispatch();
   useTick((delta) => {
-    // dispatch(symbolTicker());
     dispatch(tweeningTicker());
+    dispatch(changePosition(tweening))
+    dispatch(symbolTicker());
+    console.log(tweening)
+    // console.log(reels)
   });
+
+  // useEffect(() => {
+  //   first
+  
+    
+  // }, [reels])
+  
   const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
-  // console.log(symbolContainer[0].symbols)
+  
   return (
     <>
       {symbolContainer.map((subArr, i) => (

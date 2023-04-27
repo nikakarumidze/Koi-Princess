@@ -46,9 +46,6 @@ export const tweeningSlice = createSlice({
         // t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase));
         // Had to move lerp and easing function logic here, because of redux.
         // a1 * (1 - t) + a2 * t
-        const obj = {
-          [t.object] : 5
-        }
         t.object[t.property] =
           t.propertyBeginValue * (1 - easing(phase)) + t.target * easing(phase);
 

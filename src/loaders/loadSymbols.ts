@@ -7,6 +7,5 @@ import coins from '../assets/symbols/coins.png';
 import green from '../assets/symbols/green-dragon.png';
 import princess from '../assets/symbols/princess.png';
 import wild from '../assets/symbols/wild.png';
-import { Texture } from 'pixi.js';
 
 export const slotTextures = [a, j, q, k, ten, coins, green, princess, wild];

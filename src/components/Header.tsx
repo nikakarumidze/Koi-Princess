@@ -1,5 +1,6 @@
-import { Container, Text } from '@pixi/react';
-import { style } from '../consts';
+import { Container, Sprite, Text } from '@pixi/react';
+import { SYMBOL_SIZE, style } from '../consts';
+import { loadDecorative } from '../loaders/loadDecorations';
 
 interface IHeader {
   width: number;
@@ -15,6 +16,13 @@ const Header: React.FC<IHeader> = ({ width }) => {
   return (
     <Container width={width} height={200}>
       <Text text='play!' style={style}></Text>
+      <Sprite
+        image={loadDecorative.topLogo}
+        width={SYMBOL_SIZE * 5}
+        height={150}
+        x={width / 2}
+        y={55}
+      />
     </Container>
   );
 };

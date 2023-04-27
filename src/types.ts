@@ -23,7 +23,7 @@ export interface ITween {
   property: string;
   propertyBeginValue: number;
   target: number;
-  easing: (t: number) => number;
+  // easing: (t: number) => number;
   time: number;
   change?: any;
   complete?: any;
