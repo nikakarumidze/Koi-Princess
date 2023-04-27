@@ -6,15 +6,17 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { RootState } from '../store';
 import { symbolTicker } from '../store/symbolPosition';
 import { tweeningTicker } from '../store/tweening';
+import { slotTextures } from '../utils/loadSymbols';
 
 const CreateContainers: React.FC = () => {
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
   const dispatch = useAppDispatch();
   useTick((delta) => {
-    dispatch(symbolTicker());
+    // dispatch(symbolTicker());
     dispatch(tweeningTicker());
   });
   const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
+  // console.log(symbolContainer[0].symbols)
   return (
     <>
       {symbolContainer.map((subArr, i) => (
@@ -22,7 +24,7 @@ const CreateContainers: React.FC = () => {
           {subArr.symbols.map((symbol) => (
             <Sprite
               key={symbol.index}
-              texture={symbol.texture}
+              image={slotTextures[symbol.texture]}
               width={SYMBOL_SIZE}
               height={SYMBOL_SIZE}
               position={[symbol.x, symbol.y]}

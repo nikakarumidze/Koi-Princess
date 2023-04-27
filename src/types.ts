@@ -7,7 +7,7 @@ export interface IReel {
 }
 export interface Symbol {
   index: number;
-  texture: Texture<Resource>;
+  texture: number;
   scale: number;
   x: number;
   y: number;

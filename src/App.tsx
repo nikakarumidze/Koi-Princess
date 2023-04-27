@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CreateContainers from './components/CreateContainers';
 import { Stage } from './ContextBridge';
+import background from './assets/decorative/game-bg.jpg'
 
 const App = (): JSX.Element => {
   const [app, setApp] = useState<Application>();
@@ -14,7 +15,7 @@ const App = (): JSX.Element => {
   return (
     <Stage onMount={setApp} width={width} height={height}>
       <Sprite
-        texture={Texture.from('./assets/decorative/koiprincess_background.png')}
+        image={background}
         width={width}
         height={height}
       />

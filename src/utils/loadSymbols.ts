@@ -9,14 +9,4 @@ import princess from '../assets/symbols/princess.png';
 import wild from '../assets/symbols/wild.png';
 import { Texture } from 'pixi.js';
 
-export const slotTextures = [
-  Texture.from(a),
-  Texture.from(j),
-  Texture.from(q),
-  Texture.from(k),
-  Texture.from(ten),
-  Texture.from(coins),
-  Texture.from(green),
-  Texture.from(princess),
-  Texture.from(wild),
-];
+export const slotTextures = [a, j, q, k, ten, coins, green, princess, wild];
