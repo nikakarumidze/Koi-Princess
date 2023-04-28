@@ -39,15 +39,14 @@ export const tweeningSlice = createSlice({
       const now = Date.now();
       const remove: ITween[] = [];
       const easing = (t: number) => --t * t * ((0.5 + 1) * t + 0.5) + 1;
+      const lerp = (a1: number, a2: number, t: number): number => a1 * (1 - t) + a2 * t;
 
       state.forEach((t) => {
         const phase = Math.min(1, (now - t.start) / t.time);
 
-        // t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase));
+        t.object[t.property] = lerp(t.propertyBeginValue, t.target, easing(phase));
         // Had to move lerp and easing function logic here, because of redux.
         // a1 * (1 - t) + a2 * t
-        t.object[t.property] =
-          t.propertyBeginValue * (1 - easing(phase)) + t.target * easing(phase);
 
         if (t.change) t.change(t);
         if (phase === 1) {
