@@ -28,9 +28,7 @@ const ScoreBar: React.FC<IScoreBar> = ({ text, value }) => {
     <Container>
       {/* <Text text={text} y={-dimentions[1]} /> */}
       <Container>
-        <Sprite image={infoBar} ref={infoBarPosition}
-        scale={-1}
-        />
+        <Sprite image={infoBar} ref={infoBarPosition} />
         <Text
           text={String(value)}
           x={imageDimentions[0] / 2 - textDimentions[0] / 2}

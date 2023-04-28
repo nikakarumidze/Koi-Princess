@@ -9,9 +9,9 @@ const Header: React.FC<IHeader> = ({ width }) => {
     <Container width={width} height={200}>
       <Sprite
         image={loadDecorative.topLogo}
-        width={width * 0.7}
+        width={width * 0.55}
         height={150}
-        x={(width - width * 0.7) / 2}
+        x={(width - width * 0.55) / 2}
         scale={0.7}
       />
     </Container>

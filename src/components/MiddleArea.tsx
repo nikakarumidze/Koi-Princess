@@ -22,6 +22,12 @@ const MiddleArea: React.FC<IMiddleArea> = ({ width, height }) => {
       <Container x={(width - SYMBOL_SIZE * 4.7) / 2} y={(height - SYMBOL_SIZE * 3) / 2}>
         <CreateContainers />
       </Container>
+      <Sprite
+        image={loadDecorative.border}
+        x={(width - 2 * SYMBOL_SIZE) * ratio}
+        y={80}
+        scale={[-0.8, 0.8]} // Mirroring Original Sprite
+      />
     </>
   );
 };
