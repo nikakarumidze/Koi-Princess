@@ -1,7 +1,7 @@
 import { Container, Sprite, Text } from '@pixi/react';
 import React, { useCallback, useState } from 'react';
 import infoBar from '../../assets/controls/infoBar.png';
-import { Sprite as PixiSprite } from 'pixi.js';
+import { Sprite as PixiSprite, Text as PixiText } from 'pixi.js';
 
 interface IScoreBar {
   text: string;
@@ -9,21 +9,34 @@ interface IScoreBar {
 }
 
 const ScoreBar: React.FC<IScoreBar> = ({ text, value }) => {
-  const [dimentions, setDimentions] = useState([0, 0]);
+  const [imageDimentions, setImageDimentions] = useState([0, 0]);
+  const [textDimentions, setTextDimentions] = useState([0, 0]);
 
   const infoBarPosition = useCallback((node: PixiSprite) => {
     if (node !== null) {
-        console.log(node)
-      setDimentions([node.width, node.height]);
+      setImageDimentions([node.width, node.height]);
     }
   }, []);
-  console.log(dimentions);
+  const textPosition = useCallback((node: PixiText) => {
+    if (node !== null) {
+      setTextDimentions([node.width, node.height]);
+    }
+  }, []);
+  console.log(textDimentions);
+  console.log(imageDimentions);
   return (
     <Container>
       {/* <Text text={text} y={-dimentions[1]} /> */}
       <Container>
-        <Sprite image={infoBar} ref={infoBarPosition} />
-        <Text text={String(value)} anchor={0.5}/>
+        <Sprite image={infoBar} ref={infoBarPosition}
+        scale={-1}
+        />
+        <Text
+          text={String(value)}
+          x={imageDimentions[0] / 2 - textDimentions[0] / 2}
+          y={imageDimentions[0] / 2 - textDimentions[1] / 2}
+          ref={textPosition}
+        />
       </Container>
     </Container>
   );

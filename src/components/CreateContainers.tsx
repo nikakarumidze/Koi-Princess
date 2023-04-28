@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { BlurFilter } from 'pixi.js';
 import { withFilters, Container, Sprite, useTick } from '@pixi/react';
 import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
@@ -23,7 +23,7 @@ const CreateContainers: React.FC = () => {
   const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
 
   return (
-    <>
+    <Container scale={0.9}>
       {symbolContainer.map((subArr, i) => (
         <BlurContainer key={i} x={i * REEL_WIDTH} blur={{ blurX: 0, blurY: subArr.blurY }}>
           <Sprite image={column} scale={0.9} />
@@ -34,13 +34,13 @@ const CreateContainers: React.FC = () => {
               image={slotTextures[symbol.texture]}
               width={SYMBOL_SIZE}
               height={SYMBOL_SIZE}
-              position={[symbol.x, symbol.y+10]}
+              position={[symbol.x, symbol.y + 10]}
               scale={symbol.scale}
             />
           ))}
         </BlurContainer>
       ))}
-    </>
+    </Container>
   );
 };
 

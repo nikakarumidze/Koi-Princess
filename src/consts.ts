@@ -8,6 +8,8 @@ export const lineLength = 3;
 export const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 export const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
+export const ratio = width / 1326;
+
 export const style = new TextStyle({
   fontFamily: 'Arial',
   fontSize: 36,

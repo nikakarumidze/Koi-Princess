@@ -1,5 +1,6 @@
 import { Container } from '@pixi/react';
 import Controllers from './controllers/Controllers';
+import { SYMBOL_SIZE } from '../consts';
 
 //     bottom.drawRect(
 //       0,
@@ -13,7 +14,7 @@ interface IFooter {
 }
 const Footer: React.FC<IFooter> = ({ width, yCoord }) => {
   return (
-    <Container width={width} height={200} y={yCoord}>
+    <Container height={200} y={yCoord} x={(width - SYMBOL_SIZE * 4.7) / 2}>
       <Controllers />
     </Container>
   );
