@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { RootState } from '../../store';
 import { tweenTo } from '../../store/tweening';
 import ScoreBar from './ScoreBar';
+import TextedButton from './TextedButton';
 
 const Controllers = () => {
   const dispatch = useAppDispatch();
@@ -26,8 +27,6 @@ const Controllers = () => {
           property: 'position',
           target,
           time,
-          onchange: null,
-          // oncomplete: i === reels.length - 1 ? setRunning(false) : null,
         })
       );
     });
@@ -35,6 +34,7 @@ const Controllers = () => {
   return (
     <>
       <ScoreBar text='BET' value={gameSettings.bet} />
+      <TextedButton isDisabled={false} x={150} text='AUTO PLAY' />
       <Sprite
         image={loadControls[tweening.length ? 'spinButtonDisabled' : 'spinButton']}
         x={100 * 2.85}
@@ -42,6 +42,8 @@ const Controllers = () => {
         eventMode='dynamic'
         onpointerdown={startPlay}
       />
+      <TextedButton isDisabled={true} x={400} text='MAX BET' />
+      <ScoreBar text='COINS' value={gameSettings.coins} x={600} />
     </>
   );
 };

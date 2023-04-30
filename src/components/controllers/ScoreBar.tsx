@@ -1,41 +1,38 @@
 import { Container, Sprite, Text } from '@pixi/react';
 import React, { useCallback, useState } from 'react';
 import infoBar from '../../assets/controls/infoBar.png';
-import { Sprite as PixiSprite, Text as PixiText } from 'pixi.js';
+import { Text as PixiText } from 'pixi.js';
+import { headerStyle, style } from '../../consts';
 
 interface IScoreBar {
   text: string;
   value: number;
+  x?: number;
 }
 
-const ScoreBar: React.FC<IScoreBar> = ({ text, value }) => {
-  const [imageDimentions, setImageDimentions] = useState([0, 0]);
-  const [textDimentions, setTextDimentions] = useState([0, 0]);
+const ScoreBar: React.FC<IScoreBar> = ({ text, value, x }) => {
+  const [barDimentions, setBarDimentions] = useState([0, 0]);
 
-  const infoBarPosition = useCallback((node: PixiSprite) => {
+  const centerText = useCallback((node: PixiText) => {
     if (node !== null) {
-      setImageDimentions([node.width, node.height]);
+      node.x = node.parent.width / 2;
+      node.y = node.parent.height / 2;
+      setBarDimentions([node.parent.width, node.parent.height]);
     }
   }, []);
-  const textPosition = useCallback((node: PixiText) => {
-    if (node !== null) {
-      setTextDimentions([node.width, node.height]);
-    }
-  }, []);
-  console.log(textDimentions);
-  console.log(imageDimentions);
   return (
-    <Container>
-      {/* <Text text={text} y={-dimentions[1]} /> */}
-      <Container>
-        <Sprite image={infoBar} ref={infoBarPosition} />
-        <Text
-          text={String(value)}
-          x={imageDimentions[0] / 2 - textDimentions[0] / 2}
-          y={imageDimentions[0] / 2 - textDimentions[1] / 2}
-          ref={textPosition}
-        />
-      </Container>
+    <Container x={x}>
+      <Text
+        text={text}
+        style={headerStyle}
+        anchor={0.5}
+        x={barDimentions[0] / 2}
+        y={barDimentions[1] / 1.3}
+      />
+
+      <Sprite image={infoBar} y={barDimentions[1]}>
+        <Text text={String(value)} anchor={0.5} ref={centerText} style={style} />
+      </Sprite>
     </Container>
   );
 };

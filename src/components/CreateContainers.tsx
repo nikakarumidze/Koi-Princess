@@ -30,7 +30,6 @@ const CreateContainers: React.FC = () => {
           {subArr.symbols.map((symbol) => (
             <Sprite
               key={symbol.index}
-              zIndex={1}
               image={slotTextures[symbol.texture]}
               width={SYMBOL_SIZE}
               height={SYMBOL_SIZE}

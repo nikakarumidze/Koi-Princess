@@ -14,7 +14,7 @@ interface IFooter {
 }
 const Footer: React.FC<IFooter> = ({ width, yCoord }) => {
   return (
-    <Container height={200} y={yCoord} x={(width - SYMBOL_SIZE * 4.7) / 2}>
+    <Container y={yCoord} x={(width - SYMBOL_SIZE * 4.7) / 2}>
       <Controllers />
     </Container>
   );

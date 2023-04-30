@@ -5,26 +5,22 @@ export const SYMBOL_SIZE = 150;
 export const lineCount = 5;
 export const lineLength = 3;
 
-export const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-export const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+export const userWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+export const userHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+export const width = 1366;
+export const height = 649;
 
 export const ratio = width / 1326;
 
 export const style = new TextStyle({
-  fontFamily: 'Arial',
-  fontSize: 36,
-  fontStyle: 'italic',
+  fontSize: 20,
+  fill: '#ffffff',
+});
+export const headerStyle = new TextStyle({
+  fontSize: 20,
   fontWeight: 'bold',
-  fill: ['#ffffff', '#00ff99'], // gradient
-  stroke: '#4a1850',
-  strokeThickness: 5,
-  dropShadow: true,
-  dropShadowColor: '#000000',
-  dropShadowBlur: 4,
-  dropShadowAngle: Math.PI / 6,
-  dropShadowDistance: 6,
-  wordWrap: true,
-  wordWrapWidth: 440,
+  fill: '#FF0000',
 });
 
 export const PRINCES_SYMBOL = 'princess';
