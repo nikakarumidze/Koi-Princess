@@ -20,7 +20,7 @@ const App = (): JSX.Element => {
         <Sprite image={background} width={width} height={height} />
         <MiddleArea width={width} height={height} />
         <Header width={width} />
-        <Footer width={width} yCoord={SYMBOL_SIZE * 3 + (height - SYMBOL_SIZE * 3) / 2} />
+        <Footer width={width} yCoord={15 + SYMBOL_SIZE * 3 + (height - SYMBOL_SIZE * 3) / 2} />
       </Container>
     </Stage>
   );

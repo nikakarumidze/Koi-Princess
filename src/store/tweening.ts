@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITween } from '../types';
-import { lerp } from '../utils/utils';
 
 export const defaultTweening: ITween[] = [];
 interface TweenPayload {
   object: any;
-  property: string;
+  // property: string;
   target: number;
   time: number;
   // easing: (t: number) => number;
@@ -18,12 +17,12 @@ export const tweeningSlice = createSlice({
   initialState: defaultTweening,
   reducers: {
     tweenTo(state: ITween[], action: PayloadAction<TweenPayload>): void {
-      const { object, property, target, time, onchange, oncomplete } = action.payload;
+      const { object, target, time, onchange, oncomplete } = action.payload;
 
       const tween: ITween = {
         object,
-        property,
-        propertyBeginValue: object[property],
+        // property,
+        propertyBeginValue: object.position,
         target,
         // easing,
         time,
@@ -38,19 +37,18 @@ export const tweeningSlice = createSlice({
       // Is called upon useTick
       const now = Date.now();
       const remove: ITween[] = [];
-      const easing = (t: number) => --t * t * ((0.5 + 1) * t + 0.5) + 1;
+      const easing = (t: number) => --t * t * (1.4 * t + 0.4) + 1;
       const lerp = (a1: number, a2: number, t: number): number => a1 * (1 - t) + a2 * t;
 
       state.forEach((t) => {
         const phase = Math.min(1, (now - t.start) / t.time);
 
-        t.object[t.property] = lerp(t.propertyBeginValue, t.target, easing(phase));
+        t.object.position = lerp(t.propertyBeginValue, t.target, easing(phase));
         // Had to move lerp and easing function logic here, because of redux.
-        // a1 * (1 - t) + a2 * t
 
         if (t.change) t.change(t);
         if (phase === 1) {
-          t.object[t.property] = t.target;
+          t.object.position = t.target;
           if (t.complete) t.complete(t);
           remove.push(t);
         }

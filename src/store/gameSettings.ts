@@ -28,12 +28,21 @@ export const gameSettingsSlice = createSlice({
       state.level -= 1;
     },
     increaseCoins: (state: gameSettings) => {
-
+      const index = coinValues.indexOf(state.coinValue);
+      if (index === coinValues.length - 1) return;
+      state.coinValue = coinValues[index + 1];
     },
     decreaseCoins: (state: gameSettings) => {
-
+      const index = coinValues.indexOf(state.coinValue);
+      if (!index) return;
+      state.coinValue = coinValues[index - 1];
+    },
+    maxBet: (state: gameSettings) => {
+      state.level = 10;
+      state.coinValue = coinValues[coinValues.length - 1];
     },
   },
 });
 
-export const { increaseLevel, decreaseLevel,increaseCoins,decreaseCoins } = gameSettingsSlice.actions;
+export const { increaseLevel, decreaseLevel, increaseCoins, decreaseCoins, maxBet } =
+  gameSettingsSlice.actions;

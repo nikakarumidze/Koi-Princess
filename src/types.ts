@@ -20,7 +20,7 @@ export interface SymbolContainer {
 }
 export interface ITween {
   object: any;
-  property: string;
+  // property: string;
   propertyBeginValue: number;
   target: number;
   // easing: (t: number) => number;
