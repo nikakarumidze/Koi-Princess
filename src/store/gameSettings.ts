@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { coinValues } from '../consts';
 
 export interface gameSettings {
   bet: number;
-  level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  coinValue: 0.01 | 0.02 | 0.05 | 0.1 | 0.2 | 0.5 | 1.0;
+  level: number;
+  coinValue: string;
   coins: number;
 }
 
 export const initGameSettingsState: gameSettings = {
   bet: 40,
   level: 1,
-  coinValue: 0.01,
+  coinValue: coinValues[0],
   coins: 0,
 };
 
@@ -18,11 +19,21 @@ export const gameSettingsSlice = createSlice({
   name: 'gameSettings',
   initialState: initGameSettingsState,
   reducers: {
-    increaseLevel: (state: gameSettings, action: PayloadAction) => {
+    increaseLevel: (state: gameSettings) => {
       if (state.level === 10) return;
       state.level += 1;
+    },
+    decreaseLevel: (state: gameSettings) => {
+      if (state.level === 1) return;
+      state.level -= 1;
+    },
+    increaseCoins: (state: gameSettings) => {
+
+    },
+    decreaseCoins: (state: gameSettings) => {
+
     },
   },
 });
 
-export const { increaseLevel } = gameSettingsSlice.actions;
+export const { increaseLevel, decreaseLevel,increaseCoins,decreaseCoins } = gameSettingsSlice.actions;
