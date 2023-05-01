@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useRef } from 'react';
 import { BlurFilter, Graphics as PixiGraphics } from 'pixi.js';
 import { withFilters, Container, Sprite, useTick, Graphics } from '@pixi/react';
-import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
+import { REEL_WIDTH } from '../consts';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { RootState } from '../store';
 import { changePosition, symbolTicker } from '../store/symbolPosition';
@@ -14,7 +14,7 @@ const CreateContainers: React.FC = () => {
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
   const tweening = useAppSelector((state: RootState) => state.tweening);
   const dispatch = useAppDispatch();
-  
+
   const columnMask = useCallback((g: PixiGraphics) => {
     g.beginFill();
     g.drawRect(0, 0, REEL_WIDTH * 5, REEL_WIDTH * 3);
@@ -22,9 +22,9 @@ const CreateContainers: React.FC = () => {
   }, []);
 
   useTick((delta) => {
+    dispatch(symbolTicker());
     dispatch(tweeningTicker());
     dispatch(changePosition(tweening));
-    dispatch(symbolTicker());
   });
 
   const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
@@ -39,7 +39,7 @@ const CreateContainers: React.FC = () => {
               <Sprite
                 key={symbol.index}
                 image={slotTextures[symbol.texture]}
-                position={[symbol.x, symbol.y + 25]}
+                position={[symbol.x, symbol.y]}
                 scale={symbol.scale / 0.9}
                 mask={maskRef.current}
               />

@@ -1,10 +1,3 @@
-import { Resource, Texture } from 'pixi.js';
-
-// type ITexture = PixiRef<typeof Texture>;
-export interface IReel {
-  container: JSX.Element;
-  prevPosition: number;
-}
 export interface Symbol {
   index: number;
   texture: number;
@@ -20,12 +13,10 @@ export interface SymbolContainer {
 }
 export interface ITween {
   object: any;
-  // property: string;
   propertyBeginValue: number;
   target: number;
-  // easing: (t: number) => number;
   time: number;
-  change?: any;
-  complete?: any;
   start: number;
 }
+
+export type MatrixType = number[][];

@@ -26,9 +26,11 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
   const reels = useAppSelector((state: RootState) => state.symbolPosition);
   const tweening = useAppSelector((state: RootState) => state.tweening);
   const gameSettings = useAppSelector((state: RootState) => state.gameSettings);
+  console.log(tweening.length, 'appshi')
 
   const startPlay = useCallback(() => {
     // If tweening is in the process just return
+    console.log(tweening.length)
     if (tweening.length || gameSettings.coins < gameSettings.bet) return;
     dispatch(hitPlay());
     reels.forEach((r, i) => {
@@ -37,7 +39,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
       const time = 2500 + i * 600 + extra * 600;
       dispatch(tweenTo({ object: r, target, time }));
     });
-  }, [tweening.length, dispatch, reels, gameSettings.bet, gameSettings.coins]);
+  }, [tweening, dispatch, reels, gameSettings.bet, gameSettings.coins]);
 
   const playWithInterval = () => {
     startPlay();

@@ -24,7 +24,7 @@ const ScoreBar: React.FC<IScoreBar> = ({ text, value, x }) => {
     <Container x={x}>
       <Text text={text} style={headerStyle} anchor={0.5} x={barDimentions[0] / 2} />
       <Sprite image={infoBar} y={barDimentions[1] / 3}>
-        <Text text={String(value)} anchor={0.5} ref={centerText} style={style} />
+        <Text text={String(Math.round(value))} anchor={0.5} ref={centerText} style={style} />
       </Sprite>
     </Container>
   );

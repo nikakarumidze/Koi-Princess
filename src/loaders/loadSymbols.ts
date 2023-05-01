@@ -5,7 +5,8 @@ import q from '../assets/symbols/q.png';
 import ten from '../assets/symbols/ten.png';
 import coins from '../assets/symbols/coins.png';
 import green from '../assets/symbols/green-dragon.png';
+import yellow from '../assets/symbols/yellow-dragon.png';
 import princess from '../assets/symbols/princess.png';
 import wild from '../assets/symbols/wild.png';
 
-export const slotTextures = [a, j, q, k, ten, coins, green, princess, wild];
+export const slotTextures = [a, j, k, q, ten, coins, green, princess, wild, yellow];
