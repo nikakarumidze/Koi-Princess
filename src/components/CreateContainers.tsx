@@ -31,7 +31,7 @@ const CreateContainers: React.FC = () => {
 
   return (
     <Container scale={0.9}>
-      <Graphics draw={columnMask} ref={maskRef} />
+      <Graphics draw={columnMask} ref={maskRef}  mask={maskRef.current}/>
       {symbolContainer.map((subArr, i) => (
         <BlurContainer key={i} x={i * REEL_WIDTH} blur={{ blurX: 0, blurY: subArr.blurY }}>
           <Sprite image={column} scale={0.9}>
