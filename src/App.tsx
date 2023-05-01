@@ -6,13 +6,11 @@ import Header from './components/Header';
 import { Stage } from './ContextBridge';
 import background from './assets/decorative/game-bg.jpg';
 import MiddleArea from './components/MiddleArea';
-import Footer from './components/Footer';
+import Controllers from './components/controllers/Controllers';
 
 const App = (): JSX.Element => {
   const [app, setApp] = useState<Application>();
   (globalThis as any).__PIXI_APP__ = app;
-
-  console.log(width, height);
 
   return (
     <Stage onMount={setApp} width={userWidth} height={userHeight}>
@@ -20,7 +18,7 @@ const App = (): JSX.Element => {
         <Sprite image={background} width={width} height={height} />
         <MiddleArea width={width} height={height} />
         <Header width={width} />
-        <Footer width={width} yCoord={15 + SYMBOL_SIZE * 3 + (height - SYMBOL_SIZE * 3) / 2} />
+        <Controllers y={25 + SYMBOL_SIZE * 1.5 + height / 2} />
       </Container>
     </Stage>
   );

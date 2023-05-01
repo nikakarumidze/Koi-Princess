@@ -20,8 +20,8 @@ export const style = new TextStyle({
 });
 export const headerStyle = new TextStyle({
   fontSize: 20,
-  fontWeight: 'bold',
-  fill: '#FF0000',
+  fontWeight: '600',
+  fill: '#8b0000',
 });
 
 export const PRINCES_SYMBOL = 'princess';
