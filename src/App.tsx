@@ -14,8 +14,8 @@ const App = (): JSX.Element => {
 
   return (
     <Stage onMount={setApp} width={userWidth} height={userHeight}>
+      <Sprite image={background} width={userWidth} height={userHeight} />
       <Container scale={[userWidth / width, userHeight / height]}>
-        <Sprite image={background} width={width} height={height} />
         <MiddleArea width={width} height={height} />
         <Header width={width} />
         <Controllers y={25 + SYMBOL_SIZE * 1.5 + height / 2} />

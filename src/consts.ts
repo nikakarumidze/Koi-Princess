@@ -10,7 +10,7 @@ export const userHeight = Math.max(document.documentElement.clientHeight, window
 
 export const width = 1366;
 export const height = 649;
-export const coinValues = ['0.01', '0.02', '0.05', '0.10', '0.20', '0.50', '1.00']
+export const coinValues = ['0.01', '0.02', '0.05', '0.10', '0.20', '0.50', '1.00'];
 
 export const ratio = width / 1326;
 
@@ -24,16 +24,16 @@ export const headerStyle = new TextStyle({
   fill: '#8b0000',
 });
 
-export const PRINCES_SYMBOL = 'princess';
-export const YELLOW_DRAGON_SYMBOL = 'yellowDragon';
-export const GREEN_DRAGON_SYMBOL = 'greenDragon';
-export const WILD_SYMBOL = 'wild';
-export const COINS_SYMBOL = 'coins';
-export const A_SYMBOL = 'a';
-export const K_SYMBOL = 'k';
-export const Q_SYMBOL = 'q';
-export const J_SYMBOL = 'j';
-export const TEN_SYMBOL = '10';
+export const WILD_SYMBOL = '0';
+export const A_SYMBOL = '1';
+export const J_SYMBOL = '2';
+export const K_SYMBOL = '3';
+export const Q_SYMBOL = '4';
+export const TEN_SYMBOL = '5';
+export const COINS_SYMBOL = '6';
+export const GREEN_DRAGON_SYMBOL = '7';
+export const PRINCES_SYMBOL = '8';
+export const YELLOW_DRAGON_SYMBOL = '9';
 
 export const symbolPayoutValue: {
   [key: string]: {

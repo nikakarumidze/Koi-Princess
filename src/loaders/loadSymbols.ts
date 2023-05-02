@@ -9,4 +9,4 @@ import yellow from '../assets/symbols/yellow-dragon.png';
 import princess from '../assets/symbols/princess.png';
 import wild from '../assets/symbols/wild.png';
 
-export const slotTextures = [a, j, k, q, ten, coins, green, princess, wild, yellow];
+export const slotTextures = [wild, a, j, k, q, ten, coins, green, princess, yellow];

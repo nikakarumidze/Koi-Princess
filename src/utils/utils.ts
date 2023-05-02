@@ -1,14 +1,32 @@
-import { slotTextures } from '../loaders/loadSymbols';
+import { symbolPayoutValue } from '../consts';
+import { MatrixType, SymbolContainer } from '../types';
 
-// Generates Random Texture
-export const randomTexture = () => slotTextures[Math.floor(Math.random() * slotTextures.length)];
+// Creates matrix from redux state.
+export const createMatrix = (container: SymbolContainer[]): MatrixType => {
+  const arr: MatrixType = [];
 
-// Linear Interpolation function
-export function lerp(a1: number, a2: number, t: number): number {
-  return a1 * (1 - t) + a2 * t;
-}
+  container.forEach((subContainer) => {
+    const subArr: number[] = [];
+    subContainer.symbols.forEach((symbol) => subArr.push(symbol.texture));
+    arr.push(subArr);
+  });
+  return arr;
+};
 
-// Tweening backout function
-export function backout(amount: number): (t: number) => number {
-  return (t: number) => --t * t * ((amount + 1) * t + amount) + 1;
-}
+// Bet Lines
+export const firstBetLine = new Set([4, 2, 8, 10, 13, 16]);
+export const secondBetLine = new Set([1, 6, 7, 11, 15, 18, 19, 20]);
+export const thirdBetLine = new Set([3, 5, 9, 12, 14, 17]);
+
+// Calculate win
+export const calculateWin = (array: number[]): number => {
+  let start = array[0];
+  let count = 1;
+
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] === start || !array[i]) count++;
+    else break;
+  }
+  const result = symbolPayoutValue[String(start)][count];
+  return result === undefined ? 0 : result;
+};
