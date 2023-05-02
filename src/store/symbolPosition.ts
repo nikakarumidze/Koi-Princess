@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, Draft } from '@reduxjs/toolkit';
 import { ITween, SymbolContainer } from '../types';
-import { SYMBOL_SIZE } from '../consts';
+import { REEL_WIDTH, SYMBOL_SIZE } from '../consts';
 import { slotTextures } from '../loaders/loadSymbols';
 
 export const defaultSymbolContainer: SymbolContainer[] = Array(5)
@@ -47,7 +47,7 @@ export const symbolContainerSlice = createSlice({
         r.symbols.forEach((s, i) => {
           const prev = s.y;
           s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE + 20;
-          if (s.y > SYMBOL_SIZE * 3 && prev > 3 * SYMBOL_SIZE - 1) {
+          if (s.y > REEL_WIDTH * 3 - 15 && prev < 3 * REEL_WIDTH - 15) {
             s.texture = Math.floor(Math.random() * slotTextures.length);
           }
         });
