@@ -5,9 +5,6 @@ export const SYMBOL_SIZE = 150;
 export const lineCount = 5;
 export const lineLength = 3;
 
-export const userWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-export const userHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
 export const width = 1366;
 export const height = 649;
 export const coinValues = ['0.01', '0.02', '0.05', '0.10', '0.20', '0.50', '1.00'];
