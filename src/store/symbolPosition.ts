@@ -47,7 +47,7 @@ export const symbolContainerSlice = createSlice({
         r.symbols.forEach((s, i) => {
           const prev = s.y;
           s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE + 20;
-          if (s.y < 0 && prev > SYMBOL_SIZE) {
+          if (s.y > SYMBOL_SIZE * 3 && prev > 3 * SYMBOL_SIZE - 1) {
             s.texture = Math.floor(Math.random() * slotTextures.length);
           }
         });

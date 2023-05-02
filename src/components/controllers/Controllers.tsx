@@ -16,6 +16,7 @@ import {
   hitPlay,
 } from '../../store/gameSettings';
 import ScoreBar from './ScoreBar';
+import { calculateTotalWin } from '../../utils/winningLogic';
 
 interface IControllers {
   y: number;
@@ -26,11 +27,9 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
   const reels = useAppSelector((state: RootState) => state.symbolPosition);
   const tweening = useAppSelector((state: RootState) => state.tweening);
   const gameSettings = useAppSelector((state: RootState) => state.gameSettings);
-  console.log(tweening.length, 'appshi')
 
   const startPlay = useCallback(() => {
     // If tweening is in the process just return
-    console.log(tweening.length)
     if (tweening.length || gameSettings.coins < gameSettings.bet) return;
     dispatch(hitPlay());
     reels.forEach((r, i) => {
@@ -39,7 +38,9 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
       const time = 2500 + i * 600 + extra * 600;
       dispatch(tweenTo({ object: r, target, time }));
     });
-  }, [tweening, dispatch, reels, gameSettings.bet, gameSettings.coins]);
+    setTimeout(() => console.log(calculateTotalWin(reels, gameSettings.level)), 7000);
+
+  }, [tweening, dispatch, reels, gameSettings]);
 
   const playWithInterval = () => {
     startPlay();
