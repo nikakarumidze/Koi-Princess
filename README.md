@@ -2,15 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
-# View Deployment [link](https://koiprincess.surge.sh/)
+# View Deployment [LINK](https://koiprincess.surge.sh/)
 
 ### Used Technologies
 
-[React]
-[Typescript]
-[PixiJS]
-[ReactPixi]
-[Redux]
+React,
+Typescript,
+PixiJS,
+ReactPixi,
+Redux,
+Redux Toolkit
 
 ## Game Specifics
 

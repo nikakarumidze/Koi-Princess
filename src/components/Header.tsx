@@ -11,7 +11,7 @@ const Header: React.FC<IHeader> = ({ width }) => {
         image={loadDecorative.topLogo}
         width={width * 0.55}
         height={150}
-        x={(width - width * 0.55) / 2}
+        x={width * 0.225}
         scale={0.7}
       />
     </Container>

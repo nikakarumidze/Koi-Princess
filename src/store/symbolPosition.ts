@@ -34,6 +34,7 @@ export const defaultSymbolContainer: SymbolContainer[] = Array(5)
     previousPosition: 0,
   }));
 
+const symbolSpacing = SYMBOL_SIZE * 1.1;
 export const symbolContainerSlice = createSlice({
   name: 'symbolPosition',
   initialState: defaultSymbolContainer,
@@ -45,7 +46,7 @@ export const symbolContainerSlice = createSlice({
         r.previousPosition = r.position;
         r.symbols.forEach((s, i) => {
           const prev = s.y;
-          s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE * 1.1 + 20;
+          s.y = ((r.position + i) % r.symbols.length) * symbolSpacing + 20;
           if (s.y > REEL_WIDTH * 3 - 20 && prev < 3 * REEL_WIDTH - 20) {
             s.texture = Math.floor(Math.random() * slotTextures.length);
           }
