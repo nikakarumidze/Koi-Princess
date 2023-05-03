@@ -6,20 +6,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Used Technologies
 
-React,
-Typescript,
-PixiJS,
-ReactPixi,
-Redux,
-Redux Toolkit
+React, <br />
+Typescript, <br />
+PixiJS,<br />
+ReactPixi, <br />
+Redux, <br />
+Redux Toolkit <br />
 
 ## Game Specifics
 
-There are 20 bet Lines.
-Game levels are changable.
-Auto Play is enabled.
-The game is responsive but on mobile is playable in landscape mode.
-Spinning logic was developed with linear Interpolation and easing functions to make it smooth.
+There are 20 bet Lines. <br />
+Game levels are changable. <br />
+Auto Play is enabled. <br />
+The game is responsive but on mobile is playable in landscape mode. <br />
+Spinning logic was developed with linear Interpolation and easing functions to make it smooth. <br />
 
 ## Available Scripts
 
