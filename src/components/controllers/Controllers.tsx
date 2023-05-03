@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { loadControls } from '../../loaders/loadControls';
 import { Container, Sprite } from '@pixi/react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -23,24 +23,33 @@ interface IControllers {
 }
 
 const Controllers: React.FC<IControllers> = ({ y }) => {
+  const [loading, setLoading] = useState(false);
+  const [level, setLevel] = useState(1);
+  
   const dispatch = useAppDispatch();
   const reels = useAppSelector((state: RootState) => state.symbolPosition);
   const tweening = useAppSelector((state: RootState) => state.tweening);
   const gameSettings = useAppSelector((state: RootState) => state.gameSettings);
 
-  const startPlay = useCallback(() => {
+  useEffect(() => {
+    if (!tweening.length && loading) {
+      setLoading(false);
+      console.log(calculateTotalWin(reels, level))
+    } else if (tweening.length && !loading) setLoading(true);
+  }, [tweening, loading, level, reels]);
+
+  const startPlay = () => {
     // If tweening is in the process just return
-    if (tweening.length || gameSettings.coins < gameSettings.bet) return;
+    if (loading || gameSettings.coins < gameSettings.bet) return;
     dispatch(hitPlay());
+    setLevel(gameSettings.level);
     reels.forEach((r, i) => {
       const extra = Math.floor(Math.random() * 3);
       const target = r.position + 10 + i * 5 + extra;
       const time = 2500 + i * 600 + extra * 600;
       dispatch(tweenTo({ object: r, target, time }));
     });
-    setTimeout(() => console.log(calculateTotalWin(reels, gameSettings.level)), 7000);
-
-  }, [tweening, dispatch, reels, gameSettings]);
+  };
 
   const playWithInterval = () => {
     startPlay();

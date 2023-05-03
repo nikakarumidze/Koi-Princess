@@ -1,6 +1,6 @@
 import { symbolPayoutValue } from '../consts';
-import { combinations } from './winningLines';
-import { SymbolContainer } from '../types';
+import { combinations } from './betLines';
+import { SymbolContainer, IcalculateWin } from '../types';
 import { createMatrix } from './utils';
 
 // Calculates win on bet line
@@ -17,15 +17,20 @@ const calculateWin = (array: number[]): number => {
 };
 
 // Calculates total win
-export const calculateTotalWin = (container: SymbolContainer[], level: number): number => {
+export const calculateTotalWin = (container: SymbolContainer[], level: number): IcalculateWin[] => {
+  console.log(new Date().getMilliseconds());
   const matrix = createMatrix(container);
-
-  let win = 0;
+console.log(matrix);
+  const win = [];
   for (let i = 0; i < level * 2; i++) {
     const subArr = combinations[i](matrix);
     const subArrWin = calculateWin(subArr);
-     win += subArrWin;
+    if (!subArrWin) continue;
+    win.push({
+      combNumber: i,
+      result: subArrWin,
+    });
   }
-  console.log(win)
+  console.log(new Date().getMilliseconds());
   return win;
 };
