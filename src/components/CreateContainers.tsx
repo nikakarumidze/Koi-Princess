@@ -25,12 +25,12 @@ const CreateContainers: React.FC = () => {
     dispatch(symbolTicker());
     dispatch(tweeningTicker());
     dispatch(changePosition(tweening));
-    if (!displayWin.totalWin) {
-      if (textScale) setTextScale(0);
-      return;
-    } else {
+    if (displayWin.totalWin) {
       if (textScale >= 1) return;
       setTextScale((prevState) => prevState + 0.025);
+    } else {
+      if (textScale) setTextScale(0);
+      return;
     }
   });
 
