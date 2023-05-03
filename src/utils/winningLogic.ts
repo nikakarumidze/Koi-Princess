@@ -18,7 +18,7 @@ const calculateWin = (array: number[]): number => {
 
 // Calculates total win
 export const calculateTotalWin = (container: SymbolContainer[], level: number): IcalculateWin[] => {
-  console.log(new Date().getMilliseconds());
+  // console.log(new Date().getMilliseconds());
   const matrix = createMatrix(container);
 console.log(matrix);
   const win = [];
@@ -31,6 +31,6 @@ console.log(matrix);
       result: subArrWin,
     });
   }
-  console.log(new Date().getMilliseconds());
+  // console.log(new Date().getMilliseconds());
   return win;
 };

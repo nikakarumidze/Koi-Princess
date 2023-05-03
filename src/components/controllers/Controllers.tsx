@@ -17,6 +17,7 @@ import {
 } from '../../store/gameSettings';
 import ScoreBar from './ScoreBar';
 import { calculateTotalWin } from '../../utils/winningLogic';
+import { resetWin } from '../../store/displayWin';
 
 interface IControllers {
   y: number;
@@ -25,7 +26,7 @@ interface IControllers {
 const Controllers: React.FC<IControllers> = ({ y }) => {
   const [loading, setLoading] = useState(false);
   const [level, setLevel] = useState(1);
-  
+
   const dispatch = useAppDispatch();
   const reels = useAppSelector((state: RootState) => state.symbolPosition);
   const tweening = useAppSelector((state: RootState) => state.tweening);
@@ -33,16 +34,18 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
 
   useEffect(() => {
     if (!tweening.length && loading) {
-      setLoading(false);
-      console.log(calculateTotalWin(reels, level))
+      console.log(reels);
+      const win = calculateTotalWin(reels, level)
     } else if (tweening.length && !loading) setLoading(true);
   }, [tweening, loading, level, reels]);
 
   const startPlay = () => {
-    // If tweening is in the process just return
+    // If tweening is in the process, return
     if (loading || gameSettings.coins < gameSettings.bet) return;
+    dispatch(resetWin());
     dispatch(hitPlay());
     setLevel(gameSettings.level);
+
     reels.forEach((r, i) => {
       const extra = Math.floor(Math.random() * 3);
       const target = r.position + 10 + i * 5 + extra;
