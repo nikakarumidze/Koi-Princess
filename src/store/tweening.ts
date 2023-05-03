@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITween } from '../types';
+import { lerp, easing } from '../utils/utils';
 
 export const defaultTweening: ITween[] = [];
 interface TweenPayload {
@@ -25,9 +26,6 @@ export const tweeningSlice = createSlice({
     tweeningTicker(state: ITween[]) {
       const now = Date.now();
       const remove: ITween[] = [];
-      // Had to define lerp and easing function logic here, because of redux.
-      const easing = (t: number) => --t * t * (1.4 * t + 0.4) + 1;
-      const lerp = (a1: number, a2: number, t: number): number => a1 * (1 - t) + a2 * t;
       state.forEach((t) => {
         const phase = Math.min(1, (now - t.start) / t.time);
         t.object.position = lerp(t.propertyBeginValue, t.target, easing(phase));

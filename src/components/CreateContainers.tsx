@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { BlurFilter, Graphics as PixiGraphics } from 'pixi.js';
 import { withFilters, Container, Sprite, useTick, Graphics, Text } from '@pixi/react';
 import { REEL_WIDTH, displayWinStyle } from '../consts';
@@ -25,6 +25,9 @@ const CreateContainers: React.FC = () => {
     dispatch(symbolTicker());
     dispatch(tweeningTicker());
     dispatch(changePosition(tweening));
+  });
+
+  useTick(() => {
     if (displayWin.totalWin) {
       if (textScale >= 1) return;
       setTextScale((prevState) => prevState + 0.025);
@@ -33,16 +36,6 @@ const CreateContainers: React.FC = () => {
       return;
     }
   });
-
-  // useEffect(() => {
-  //   console.log(textScale);
-  //   if (!displayWin.totalWin) {
-  //     if (textScale) setTextScale(0);
-  //     return;
-  //   }
-  //   if (textScale >= 1) return;
-  //   setTextScale((prevState) => prevState + 0.02);
-  // }, [textScale, displayWin.totalWin]);
 
   return (
     <>

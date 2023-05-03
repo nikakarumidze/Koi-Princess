@@ -11,12 +11,12 @@ interface IScoreBar {
 }
 
 const ScoreBar: React.FC<IScoreBar> = ({ text, value, x }) => {
-  const [barDimentions, setBarDimentions] = useState([0, 0]);
+  const [barDimentions, setBarDimentions] = useState([136, 43]);
 
   const centerText = useCallback((node: PixiText) => {
     if (node !== null) {
-      node.x = node.parent.width / 2;
-      node.y = node.parent.height / 2;
+      // node.x = node.parent.width / 2;
+      // node.y = node.parent.height / 2;
       setBarDimentions([node.parent.width, node.parent.height]);
     }
   }, []);
@@ -24,7 +24,14 @@ const ScoreBar: React.FC<IScoreBar> = ({ text, value, x }) => {
     <Container x={x}>
       <Text text={text} style={headerStyle} anchor={0.5} x={barDimentions[0] / 2} />
       <Sprite image={infoBar} y={barDimentions[1] / 3}>
-        <Text text={String(Math.round(value))} anchor={0.5} ref={centerText} style={style} />
+        <Text
+          text={String(Math.round(value))}
+          anchor={0.5}
+          ref={centerText}
+          style={style}
+          x={barDimentions[0] / 2}
+          y={barDimentions[1] / 2}
+        />
       </Sprite>
     </Container>
   );

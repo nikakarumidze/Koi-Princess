@@ -46,7 +46,7 @@ export const symbolContainerSlice = createSlice({
         // Update symbol positions on reel.
         r.symbols.forEach((s, i) => {
           const prev = s.y;
-          s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE + 20;
+          s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE * 1.1 + 10;
           if (s.y > REEL_WIDTH * 3 - 15 && prev < 3 * REEL_WIDTH - 15) {
             s.texture = Math.floor(Math.random() * slotTextures.length);
           }

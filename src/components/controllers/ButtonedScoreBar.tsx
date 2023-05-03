@@ -23,7 +23,7 @@ const ButtonedScoreBar: React.FC<IButtonedScoreBar> = ({
   onIncrease,
   onDecrease,
 }) => {
-  const [barDimentions, setBarDimentions] = useState([0, 0]);
+  const [barDimentions, setBarDimentions] = useState([117, 43]);
 
   const centerText = useCallback((node: PixiText) => {
     if (node !== null) {
@@ -37,7 +37,7 @@ const ButtonedScoreBar: React.FC<IButtonedScoreBar> = ({
     <Container x={x} sortableChildren={true}>
       <Text text={text} style={headerStyle} anchor={0.5} x={barDimentions[0] / 2} />
       <Sprite image={loadControls.infoBarWide} y={barDimentions[1] / 3} zIndex={0}>
-        <Text text={String(value)} anchor={0.5} style={style} ref={centerText} zIndex={999}/>
+        <Text text={String(value)} anchor={0.5} style={style} ref={centerText} zIndex={999} />
         <Sprite
           image={value === minValue ? loadControls.leftButtonDisabled : loadControls.leftButton}
           cursor='pointer'
