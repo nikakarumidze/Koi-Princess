@@ -43,11 +43,10 @@ export const symbolContainerSlice = createSlice({
         // Update blur filter y amount based on speed.
         r.blurY = (r.position - r.previousPosition) * 8;
         r.previousPosition = r.position;
-        // Update symbol positions on reel.
         r.symbols.forEach((s, i) => {
           const prev = s.y;
-          s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE * 1.1 + 10;
-          if (s.y > REEL_WIDTH * 3 - 15 && prev < 3 * REEL_WIDTH - 15) {
+          s.y = ((r.position + i) % r.symbols.length) * SYMBOL_SIZE * 1.1 + 20;
+          if (s.y > REEL_WIDTH * 3 - 20 && prev < 3 * REEL_WIDTH - 20) {
             s.texture = Math.floor(Math.random() * slotTextures.length);
           }
         });
