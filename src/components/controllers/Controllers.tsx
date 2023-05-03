@@ -40,6 +40,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
 
       dispatch(addWonCoins([win.totalWin, tempGameSettings[1]]));
       dispatch(applyWin(win));
+      setTimeout(() => dispatch(resetWin()), 3000);
     } else if (tweening.length && !loading) {
       setLoading(true);
     }
@@ -61,6 +62,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
   };
 
   const playWithInterval = () => {
+    if (loading) return;
     startPlay();
     const intervalTime = 7200;
     const executeTimes = 5;
@@ -80,7 +82,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
         onIncrease={() => dispatch(increaseLevel())}
         onDecrease={() => dispatch(decreaseLevel())}
       />
-      <TextedButton isDisabled={false} x={280} text='AUTO PLAY' onClick={playWithInterval} />
+      <TextedButton isDisabled={loading} x={280} text='AUTO PLAY' onClick={playWithInterval} />
       <Sprite
         image={loadControls[tweening.length ? 'spinButtonDisabled' : 'spinButton']}
         x={2.9 * SYMBOL_SIZE}

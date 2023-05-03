@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef } from 'react';
+import React, { useMemo, useEffect, useRef, useState } from 'react';
 import { BlurFilter, Graphics as PixiGraphics } from 'pixi.js';
 import { withFilters, Container, Sprite, useTick, Graphics, Text } from '@pixi/react';
 import { REEL_WIDTH, displayWinStyle } from '../consts';
@@ -8,30 +8,44 @@ import { changePosition, symbolTicker } from '../store/symbolPosition';
 import { tweeningTicker } from '../store/tweening';
 import { slotTextures } from '../loaders/loadSymbols';
 import column from '../assets/decorative/column-bg.png';
+import { columnMask } from '../utils/utils';
 
 const CreateContainers: React.FC = () => {
+  const [textScale, setTextScale] = useState(0);
   const maskRef = useRef<PixiGraphics>(null);
+
   const BlurContainer = useMemo(() => withFilters(Container, { blur: BlurFilter }), []);
+
   const tweening = useAppSelector((state: RootState) => state.tweening);
   const displayWin = useAppSelector((state: RootState) => state.displayWin);
+  const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
   const dispatch = useAppDispatch();
-
-  const columnMask = useCallback((g: PixiGraphics) => {
-    g.beginFill();
-    g.drawRect(0, 0, REEL_WIDTH * 5, REEL_WIDTH * 3);
-    g.endFill();
-  }, []);
 
   useTick((delta) => {
     dispatch(symbolTicker());
     dispatch(tweeningTicker());
     dispatch(changePosition(tweening));
+    if (!displayWin.totalWin) {
+      if (textScale) setTextScale(0);
+      return;
+    } else {
+      if (textScale >= 1) return;
+      setTextScale((prevState) => prevState + 0.025);
+    }
   });
 
-  const symbolContainer = useAppSelector((state: RootState) => state.symbolPosition);
+  // useEffect(() => {
+  //   console.log(textScale);
+  //   if (!displayWin.totalWin) {
+  //     if (textScale) setTextScale(0);
+  //     return;
+  //   }
+  //   if (textScale >= 1) return;
+  //   setTextScale((prevState) => prevState + 0.02);
+  // }, [textScale, displayWin.totalWin]);
 
   return (
-    <Container scale={0.9}>
+    <>
       <Graphics draw={columnMask} ref={maskRef} mask={maskRef.current} />
       {symbolContainer.map((subArr, i) => (
         <BlurContainer key={i} x={i * REEL_WIDTH} blur={{ blurX: 0, blurY: subArr.blurY }}>
@@ -54,8 +68,9 @@ const CreateContainers: React.FC = () => {
         x={REEL_WIDTH * 2.5}
         y={REEL_WIDTH * 1.5}
         anchor={0.5}
+        scale={textScale}
       />
-    </Container>
+    </>
   );
 };
 

@@ -5,15 +5,18 @@ import { createMatrix } from './utils';
 
 // Calculates win on the single bet line
 const calculateWin = (symbols: number[]): number => {
-  const firstSymbol = symbols[0];
-  let numberOfConsecutiveSymbols = 1;
+  let firstSymbol;
+  let numberOfConsecutiveSymbols = 0;
 
-  for (let i = 1; i < symbols.length; i++) {
+  for (let i = 0; i < symbols.length; i++) {
+    // Case when first symbol is undefined or 0 (wild symbol)
+    if (!firstSymbol) firstSymbol = symbols[i];
+
     if (symbols[i] === firstSymbol || !symbols[i]) numberOfConsecutiveSymbols++;
     else break;
   }
 
-  return 10 * symbolPayoutValue[firstSymbol][numberOfConsecutiveSymbols] ?? 0;
+  return 10 * symbolPayoutValue[firstSymbol as number][numberOfConsecutiveSymbols] ?? 0;
 };
 
 export const calculateTotalWin = (container: SymbolContainer[], level: number): IcalculateWin => {

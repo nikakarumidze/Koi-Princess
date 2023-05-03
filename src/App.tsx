@@ -12,6 +12,7 @@ const App = (): JSX.Element => {
   const [app, setApp] = useState<Application>();
   const [size, setSize] = useState([0, 0]);
   (globalThis as any).__PIXI_APP__ = app;
+
   useEffect(() => {
     function updateSize() {
       setSize([window.innerWidth, window.innerHeight]);

@@ -9,8 +9,6 @@ export const width = 1366;
 export const height = 649;
 export const coinValues = ['0.01', '0.02', '0.05', '0.10', '0.20', '0.50', '1.00'];
 
-export const ratio = width / 1326;
-
 export const style = new TextStyle({
   fontSize: 20,
   fill: '#ffffff',
