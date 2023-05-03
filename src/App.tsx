@@ -24,12 +24,16 @@ const App = (): JSX.Element => {
 
   return (
     <Stage onMount={setApp} width={size[0]} height={size[1]}>
-      <Sprite image={background} width={size[0]} height={size[1]} />
-      <Container scale={[size[0] / width, size[1] / height]}>
-        <MiddleArea width={width} height={height} />
-        <Header width={width} />
-        <Controllers y={25 + SYMBOL_SIZE * 1.5 + height / 2} />
-      </Container>
+      {app && (
+        <>
+          <Sprite image={background} width={size[0]} height={size[1]} />
+          <Container scale={[size[0] / width, size[1] / height]}>
+            <MiddleArea width={width} height={height} />
+            <Header width={width} />
+            <Controllers y={25 + SYMBOL_SIZE * 1.5 + height / 2} />
+          </Container>
+        </>
+      )}
     </Stage>
   );
 };

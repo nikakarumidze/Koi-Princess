@@ -9,8 +9,8 @@ export interface gameSettings {
 }
 
 export const initGameSettingsState: gameSettings = {
-  bet: 40,
-  level: 1,
+  bet: 400,
+  level: 10,
   coinValue: coinValues[0],
   coins: 50000,
 };
