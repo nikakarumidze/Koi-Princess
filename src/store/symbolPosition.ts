@@ -54,7 +54,7 @@ export const symbolContainerSlice = createSlice({
       });
     },
     changePosition: (state: Draft<SymbolContainer[]>, action: PayloadAction<ITween[]>) => {
-      if (!action.payload.length) return;
+      if (!action.payload.length || action.payload[0].object.position === undefined) return;
       action.payload.forEach((obj, i) => (state[i].position = obj.object.position));
     },
   },

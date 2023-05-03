@@ -3,34 +3,39 @@ import { combinations } from './betLines';
 import { SymbolContainer, IcalculateWin } from '../types';
 import { createMatrix } from './utils';
 
-// Calculates win on bet line
-const calculateWin = (array: number[]): number => {
-  let start = array[0];
-  let count = 1;
+// Calculates win on the single bet line
+const calculateWin = (symbols: number[]): number => {
+  const firstSymbol = symbols[0];
+  let numberOfConsecutiveSymbols = 1;
 
-  for (let i = 1; i < array.length; i++) {
-    if (array[i] === start || !array[i]) count++;
+  for (let i = 1; i < symbols.length; i++) {
+    if (symbols[i] === firstSymbol || !symbols[i]) numberOfConsecutiveSymbols++;
     else break;
   }
-  const result = symbolPayoutValue[String(start)][count];
-  return result === undefined ? 0 : result;
+
+  return 10 * symbolPayoutValue[firstSymbol][numberOfConsecutiveSymbols] ?? 0;
 };
 
-// Calculates total win
-export const calculateTotalWin = (container: SymbolContainer[], level: number): IcalculateWin[] => {
-  // console.log(new Date().getMilliseconds());
+export const calculateTotalWin = (container: SymbolContainer[], level: number): IcalculateWin => {
   const matrix = createMatrix(container);
-console.log(matrix);
-  const win = [];
+
+  const singleWins = [];
+  let totalWin = 0;
+
   for (let i = 0; i < level * 2; i++) {
     const subArr = combinations[i](matrix);
     const subArrWin = calculateWin(subArr);
+
     if (!subArrWin) continue;
-    win.push({
+
+    totalWin += subArrWin;
+    singleWins.push({
       combNumber: i,
-      result: subArrWin,
+      win: subArrWin,
     });
   }
-  // console.log(new Date().getMilliseconds());
-  return win;
+  return {
+    totalWin,
+    singleWins,
+  };
 };

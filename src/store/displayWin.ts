@@ -1,33 +1,24 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { coinValues } from '../consts';
+import { IcalculateWin } from '../types';
 
-export interface IdisplayWin {
-  totalWin: number;
-  wonBetLines: number[];
-  wonAmount: number[];
-}
-
-export const initialState: IdisplayWin = {
+export const initialState: IcalculateWin = {
   totalWin: 0,
-  wonBetLines: [],
-  wonAmount: [],
+  singleWins: [],
 };
 
-export const gameSettingsSlice = createSlice({
+export const displayWinSlice = createSlice({
   name: 'displayWin',
   initialState,
   reducers: {
-    resetWin: (state: IdisplayWin) => {
+    resetWin: (state: IcalculateWin) => {
       state.totalWin = 0;
-      state.wonBetLines.length = 0;
-      state.wonAmount.length = 0;
+      state.singleWins.length = 0;
     },
-    applyWin: (state: IdisplayWin, action: PayloadAction<IdisplayWin>) => {
+    applyWin: (state: IcalculateWin, action: PayloadAction<IcalculateWin>) => {
       state.totalWin = action.payload.totalWin;
-      state.wonAmount = action.payload.wonAmount;
-      state.wonBetLines = action.payload.wonBetLines;
+      state.singleWins = action.payload.singleWins;
     },
   },
 });
 
-export const { resetWin, applyWin } = gameSettingsSlice.actions;
+export const { resetWin, applyWin } = displayWinSlice.actions;

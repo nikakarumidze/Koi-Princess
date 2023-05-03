@@ -21,6 +21,21 @@ export const headerStyle = new TextStyle({
   fill: '#8b0000',
 });
 
+export const displayWinStyle = new TextStyle({
+  fontSize: 100,
+  fontWeight: 'bold',
+  fill: ['#ffffff', '#90EE90'], // gradient
+  stroke: '#4a1850',
+  strokeThickness: 5,
+  dropShadow: true,
+  dropShadowColor: '#000000',
+  dropShadowBlur: 4,
+  dropShadowAngle: Math.PI / 6,
+  dropShadowDistance: 6,
+  wordWrap: true,
+  wordWrapWidth: 440,
+});
+
 export const WILD_SYMBOL = '0';
 export const A_SYMBOL = '1';
 export const J_SYMBOL = '2';

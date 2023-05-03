@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadControls } from '../../loaders/loadControls';
 import { Container, Sprite } from '@pixi/react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -14,10 +14,11 @@ import {
   decreaseCoins,
   maxBet,
   hitPlay,
+  addWonCoins,
 } from '../../store/gameSettings';
 import ScoreBar from './ScoreBar';
 import { calculateTotalWin } from '../../utils/winningLogic';
-import { resetWin } from '../../store/displayWin';
+import { applyWin, resetWin } from '../../store/displayWin';
 
 interface IControllers {
   y: number;
@@ -25,7 +26,7 @@ interface IControllers {
 
 const Controllers: React.FC<IControllers> = ({ y }) => {
   const [loading, setLoading] = useState(false);
-  const [level, setLevel] = useState(1);
+  const [tempGameSettings, setTempGameSettings] = useState([1]);
 
   const dispatch = useAppDispatch();
   const reels = useAppSelector((state: RootState) => state.symbolPosition);
@@ -34,17 +35,22 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
 
   useEffect(() => {
     if (!tweening.length && loading) {
-      console.log(reels);
-      const win = calculateTotalWin(reels, level)
-    } else if (tweening.length && !loading) setLoading(true);
-  }, [tweening, loading, level, reels]);
+      setLoading(false);
+      const win = calculateTotalWin(reels, tempGameSettings[0]);
+
+      dispatch(addWonCoins([win.totalWin, tempGameSettings[1]]));
+      dispatch(applyWin(win));
+    } else if (tweening.length && !loading) {
+      setLoading(true);
+    }
+  }, [tweening, loading, tempGameSettings, reels, dispatch]);
 
   const startPlay = () => {
     // If tweening is in the process, return
     if (loading || gameSettings.coins < gameSettings.bet) return;
     dispatch(resetWin());
     dispatch(hitPlay());
-    setLevel(gameSettings.level);
+    setTempGameSettings([gameSettings.level, Number(gameSettings.coinValue)]);
 
     reels.forEach((r, i) => {
       const extra = Math.floor(Math.random() * 3);
@@ -70,14 +76,14 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
         value={gameSettings.level}
         minValue={0}
         maxValue={10}
-        x={150}
+        x={SYMBOL_SIZE}
         onIncrease={() => dispatch(increaseLevel())}
         onDecrease={() => dispatch(decreaseLevel())}
       />
       <TextedButton isDisabled={false} x={280} text='AUTO PLAY' onClick={playWithInterval} />
       <Sprite
         image={loadControls[tweening.length ? 'spinButtonDisabled' : 'spinButton']}
-        x={280 + (550 - 280 + 131 - 88) / 2} // w-88
+        x={2.9 * SYMBOL_SIZE}
         anchor={[0, 0.2]}
         cursor='pointer'
         eventMode='dynamic'
@@ -85,7 +91,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
       />
       <TextedButton
         isDisabled={gameSettings.level === 10}
-        x={550} // w-131
+        x={100 + SYMBOL_SIZE * 3}
         text='MAX BET'
         onClick={() => dispatch(maxBet())}
       />
@@ -94,7 +100,7 @@ const Controllers: React.FC<IControllers> = ({ y }) => {
         value={gameSettings.coinValue}
         minValue='0.01'
         maxValue='1.00'
-        x={700}
+        x={100 + SYMBOL_SIZE * 4}
         onIncrease={() => dispatch(increaseCoins())}
         onDecrease={() => dispatch(decreaseCoins())}
       />

@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { gameSettingsSlice } from './gameSettings';
 import { symbolContainerSlice } from './symbolPosition';
 import { tweeningSlice } from './tweening';
+import { displayWinSlice } from './displayWin';
 
 export const store = configureStore({
   reducer: {
     gameSettings: gameSettingsSlice.reducer,
     symbolPosition: symbolContainerSlice.reducer,
     tweening: tweeningSlice.reducer,
+    displayWin: displayWinSlice.reducer,
   },
 });
 

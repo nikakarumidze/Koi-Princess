@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { coinValues } from '../consts';
 
 export interface gameSettings {
@@ -48,8 +48,19 @@ export const gameSettingsSlice = createSlice({
     hitPlay: (state: gameSettings) => {
       state.coins -= state.bet;
     },
+    addWonCoins: (state: gameSettings, action: PayloadAction<number[]>) => {
+      action.payload[0] *= action.payload[1] / Number(state.coinValue);
+      state.coins += action.payload[0];
+    },
   },
 });
 
-export const { increaseLevel, decreaseLevel, increaseCoins, decreaseCoins, maxBet, hitPlay } =
-  gameSettingsSlice.actions;
+export const {
+  increaseLevel,
+  decreaseLevel,
+  increaseCoins,
+  decreaseCoins,
+  maxBet,
+  hitPlay,
+  addWonCoins,
+} = gameSettingsSlice.actions;

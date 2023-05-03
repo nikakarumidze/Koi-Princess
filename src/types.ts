@@ -22,6 +22,9 @@ export interface ITween {
 export type MatrixType = number[][];
 
 export interface IcalculateWin {
-  result: number;
-  combNumber: number;
+  totalWin: number;
+  singleWins: {
+    win: number;
+    combNumber: number;
+  }[];
 }
