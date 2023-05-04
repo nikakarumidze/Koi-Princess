@@ -15,9 +15,11 @@ const ScoreBar: React.FC<IScoreBar> = ({ text, value, x }) => {
 
   const centerText = useCallback((node: PixiText) => {
     if (node !== null) {
-      node.x = node.parent.width / 2;
-      node.y = node.parent.height / 2;
-      setBarDimentions([node.parent.width, node.parent.height]);
+      node.texture.once('update', () => {
+        node.x = node.parent.width / 2;
+        node.y = node.parent.height / 2;
+        setBarDimentions([node.parent.width, node.parent.height]);
+      });
     }
   }, []);
   return (

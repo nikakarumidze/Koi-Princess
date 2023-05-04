@@ -14,8 +14,10 @@ interface ITextedButton {
 const TextedButton: React.FC<ITextedButton> = ({ text, isDisabled, x, onClick }) => {
   const centerText = useCallback((node: PixiText) => {
     if (node !== null) {
-      node.x = node.parent.width / 2;
-      node.y = node.parent.height / 2;
+      node.texture.once('update', () => {
+        node.x = node.parent.width / 2;
+        node.y = node.parent.height / 2;
+      });
     }
   }, []);
   return (
